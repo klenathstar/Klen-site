@@ -9,6 +9,8 @@ function addEventListener() {
     document.addEventListener('keydown', handleKeyPress);
 }
 
+let board = new Board();
+
 // Start game button
 function play() {
     board = new Board(ctx);
