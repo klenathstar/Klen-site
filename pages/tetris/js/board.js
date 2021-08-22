@@ -50,21 +50,16 @@ class Board {
         )
     }
 
-    valid(p) {
-        return p.shape.every((row, dy) => {
-            return row.every((value, dx) =>
-                value === 0 ||
-                this.isInsideWalls(p.x + dx, p.y + dy)
-            );
-        });
+    isNotOccupied(x, y) {
+        return this.grid[y] && this.grid[y][x] === 0;
     }
 
-    freeze() {
-        this.piece.shape.forEach((row, y) => {
-            row.forEach((value, x) => {
-                if (value > 0) {
-                    this.grid[y + this.piece.y][x + this.piece.x] = value;
-                }
+    valid(p) {
+        return p.shape.every((row, dy) => {
+            return row.every((value, dx) => {
+                let x = p.x + dx;
+                let y = p.y + dy;
+                return value === 0 || (this.isInsideWalls(x, y) && this.isNotOccupied(x, y));
             });
         });
     }
@@ -78,16 +73,26 @@ class Board {
           this.freeze();
           this.piece = new Piece(this.ctx);
         } 
-      }
+    }
     
-    draw() {
-        this.grid.forEach((row, y) => {
+    freeze() {
+        this.piece.shape.forEach((row, y) => {
             row.forEach((value, x) => {
                 if (value > 0) {
-                    this.ctx.fillStyle = COLORS[value-1];
-                    this.ctx.fillRect(x, y, 1, 1);
+                    this.grid[y + this.piece.y][x + this.piece.x] = value;
                 }
             });
         });
+    }
+
+    draw() {  
+        this.grid.forEach((row, y) => {  
+            row.forEach((value, x) => {  
+                if (value > 0) {  
+                    this.ctx.fillStyle = COLORS[value++];  
+                    this.ctx.fillRect(x, y, 1, 1);  
+                }  
+            });  
+        });  
     }
 }

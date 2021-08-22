@@ -32,7 +32,7 @@ function animate(now = 0) {
     if (time.elapsed > time.level) {
         time.start = now;
 
-        drop();
+        board.drop();
     }
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -43,7 +43,6 @@ function animate(now = 0) {
 
 // create piece
 function draw() {
-    const { width, height } = ctx.canvas;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     board.draw();
