@@ -83,13 +83,23 @@ class Board {
                 }
             });
         });
+        this.clearLines();
+    }
+
+    clearLines() {
+        this.grid.forEach((row, y) => {
+            if (row.every(value => value > 0)) {
+                this.grid.splice(y, 1);
+                this.grid.unshift(Array(COLS).fill(0));
+            }
+        });
     }
 
     draw() {  
         this.grid.forEach((row, y) => {  
             row.forEach((value, x) => {  
                 if (value > 0) {  
-                    this.ctx.fillStyle = COLORS[value++];  
+                    this.ctx.fillStyle = COLORS[value-1];  
                     this.ctx.fillRect(x, y, 1, 1);  
                 }  
             });  
