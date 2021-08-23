@@ -1,12 +1,69 @@
-const canvas = document.getElementById('board');
-const ctx = canvas.getContext('2d');
-
+// Canvas Size calculations
 ctx.canvas.width = COLS * BLOCK_SIZE;
 ctx.canvas.height = ROWS * BLOCK_SIZE;
 
 ctx.scale(BLOCK_SIZE, BLOCK_SIZE);
 
+function addEventListener() {
+    document.removeEventListener('keydown', handleKeyPress);
+    document.addEventListener('keydown', handleKeyPress);
+}
+
+let board = new Board();
+
+// Start game button
 function play() {
     board = new Board(ctx);
-    console.table(board.grid);
+    addEventListener();
+    
+    if (requestId) {
+        cancelAnimationFrame(requestId);
+    }
+
+    time.start = performance.now();
+    animate();
+}
+
+let time = { start: 0, elapsed: 0, level: 1000 };
+
+// create piece
+function draw() {
+    const { width, height } = ctx.canvas;
+    ctx.clearRect(0, 0, width, height);  
+
+    board.draw();
+    board.piece.draw();
+}
+
+// Handle movement
+function handleKeyPress(event) {
+    event.preventDefault();
+
+    if (moves[event.keyCode]) {
+        let p = moves[event.keyCode](board.piece);
+        
+        if (event.keyCode === KEY.UP) { 
+            while (board.valid(p)) {
+                board.piece.move(p);
+                p = moves[KEY.UP](board.piece);
+            }
+        }
+
+        if (board.valid(p)) {
+            board.piece.move(p);
+        }
+    }
+}
+
+function animate(now = 0) {
+    time.elapsed = now - time.start;
+
+    if (time.elapsed > time.level) {
+        time.start = now;
+
+        board.drop();
+    }
+
+    draw();
+    requestId = requestAnimationFrame(animate);
 }
