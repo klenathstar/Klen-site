@@ -26,7 +26,7 @@ moves = {
 
 let requestId = null;
 
-const COLORS = ['cyan', 'blue', 'orange', 'yellow', 'green', 'purple', 'red'];
+const COLORS = ['red', 'blue', 'orange', 'cyan', 'lime', 'magenta', 'yellow'];
 
 const SHAPES = [
     [[0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]],
