@@ -8,8 +8,13 @@ nav {
 }
 #headshot {
     float: left;
-    width: 200px;
-    height: 250px;
+    width: 400px;
+    height: 300px;
+}
+aside {
+    float: right;
+    margin-right: 1em;
+    text-align: right;
 }
 footer {
     font-size: 16px;
