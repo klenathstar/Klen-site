@@ -1,9 +1,11 @@
 class Board {
-    constructor(ctx) {
+    constructor(ctx, ctxNext) {
         this.ctx = ctx;
+        this.ctxNext = ctxNext;
         this.grid = this.getEmptyBoard();
-        this.piece = new Piece(ctx);
-    }
+        this.setNextPiece();
+        this.setCurrentPiece();
+      }
     
 // Fill matrix with zeros
     getEmptyBoard() {
@@ -74,7 +76,7 @@ class Board {
           if (this.piece.y === 0 && this.piece.x === 3) {
               return false;
           }
-          this.piece = new Piece(this.ctx);
+          this.setCurrentPiece();
         } 
         return true;
     }
@@ -91,22 +93,63 @@ class Board {
     }
 
     clearLines() {
+        let lines = 0;
         this.grid.forEach((row, y) => {
             if (row.every(value => value > 0)) {
+                lines++;
                 this.grid.splice(y, 1);
                 this.grid.unshift(Array(COLS).fill(0));
             }
         });
+
+        if (lines > 0) {
+            account.score += this.getLineClearPoints(lines);
+            account.lines += lines;
+
+            if (account.lines >= LINES_PER_LEVEL) {
+                account.level++;
+                account.lines -+LINES_PER_LEVEL;
+                time.level = LEVEL[account.level];
+            }
+        }
     }
 
     draw() {  
         this.grid.forEach((row, y) => {  
             row.forEach((value, x) => {  
                 if (value > 0) {  
+                    this.ctx.fillStyle = 'black';
+                    this.ctx.fillRect(x, y, 1, 1);
                     this.ctx.fillStyle = COLORS[value-1];  
-                    this.ctx.fillRect(x, y, 1, 1);  
+                    this.ctx.fillRect(x + 0.05, y + 0.05, 0.9, 0.9);  
                 }  
             });  
         });  
     }
+
+    getLineClearPoints(lines) {
+        const lineClearPoints =
+                lines === 1 ? POINTS.SINGLE :
+                lines === 2 ? POINTS.DOUBLE :
+                lines === 3 ? POINTS.TRIPLE :
+                lines === 4 ? POINTS.TETRIS :
+                0;
+
+        return (account.level + 1) * lineClearPoints;
+    }
+
+    setNextPiece() {
+        const { width, height } = this.ctxNext.canvas;
+        this.nextPiece = new Piece(this.ctxNext);
+        this.ctxNext.clearRect(0, 0, width, height);
+        this.nextPiece.draw();
+      }
+    
+      setCurrentPiece() {
+        this.piece = this.nextPiece;
+        this.piece.ctx = this.ctx;
+        this.piece.x = 3;
+        this.piece.y = 0;
+        this.setNextPiece();
+      }
 }

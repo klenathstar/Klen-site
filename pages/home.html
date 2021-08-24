@@ -12,19 +12,22 @@
     </header>
     <div id="content">
         <div class="grid">
+            <div id="high-score"><h1>High Scores:</h1></div>
             <canvas id="board" class="game-board"></canvas>
             <div class="right-column">
               <div>
+                <canvas id="next" class="next"><p>NEXT</p></canvas>
                 <h1>TETRIS</h1>
                 <p>Score: <span id="score">0</span></p>
                 <p>Lines: <span id="lines">0</span></p>
                 <p>Level: <span id="level">0</span></p>
-                <p><br>Left and Right arrow keys: move<br></p>
-                <p>Down arrow key: drop 1<br></p>
-                <p>Up arrow key: drop all the way<br></p>
-                <p>Z: rotate counter-clockwise<br></p>
-                <p>X: rotate clockwise</p>
-                <canvas id="next" class="next"></canvas>
+                <div id="controls">
+                  <p><br>Left and Right arrow keys: move<br></p>
+                  <p>Down arrow key: drop once<br></p>
+                  <p>Up arrow key: drop all the way<br></p>
+                  <p>Z: rotate counter-clockwise<br></p>
+                  <p>X: rotate clockwise</p>
+                </div>
               </div>
               <button onclick="play()" class="play-button">Play</button>
             </div>

@@ -1,26 +1,17 @@
-// Canvas Size calculations
-ctx.canvas.width = COLS * BLOCK_SIZE;
-ctx.canvas.height = ROWS * BLOCK_SIZE;
-
-ctx.scale(BLOCK_SIZE, BLOCK_SIZE);
-
 function addEventListener() {
     document.removeEventListener('keydown', handleKeyPress);
     document.addEventListener('keydown', handleKeyPress);
 }
 
-let board = new Board();
-
 // Start game button
 function play() {
-    board = new Board(ctx);
+    resetGame();
     addEventListener();
     
     if (requestId) {
         cancelAnimationFrame(requestId);
     }
 
-    time.start = performance.now();
     animate();
 }
 
@@ -45,12 +36,14 @@ function handleKeyPress(event) {
         if (event.keyCode === KEY.UP) { 
             while (board.valid(p)) {
                 board.piece.move(p);
-                p = moves[KEY.UP](board.piece);
+                account.score += POINTS.HARD_DROP;
+                p = moves[KEY.DOWN](board.piece);
             }
-        }
-
-        if (board.valid(p)) {
+        } else if (board.valid(p)) {
             board.piece.move(p);
+            if (event.keyCode === KEY.DOWN) {
+                account.score += POINTS.SOFT_DROP;
+            }
         }
     }
 }
@@ -79,4 +72,33 @@ function gameOver() {
     ctx.fillStyle = 'red';
     ctx.font = '1px Courier New';
     ctx.fillText(' GAME OVER', 1.8, 4);
+}
+
+let accountValues = {
+    score: 0,
+    lines: 0,
+    level: 0
+}
+
+let account = new Proxy(accountValues, {
+    set: (target, key, value) => {
+        target[key] = value;
+        updateAccount(key, value);
+        return true;
+    }
+});
+
+function updateAccount(key, value) {
+    let element = document.getElementById(key);
+    if (element) {
+        element.textContent = value;
+    }
+}
+
+function resetGame() {
+    account.score = 0;
+    account.lines = 0;
+    account.level = 0;
+    board = new Board(ctx, ctxNext);
+    time = {start: performance.now(), elapsed: 0, level: LEVEL[0]}
 }

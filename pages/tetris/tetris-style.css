@@ -1,22 +1,36 @@
 .grid {
-    display: grid;
-    grid-template-columns: 320px 200px;
-  }
-   
-  .right-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-   
-  .game-board {
-    border: solid 2px;
-  }
-   
-  .play-button {
-    background-color: #4caf50;
-    font-size: 16px;
-    padding: 15px 30px;
-    cursor: pointer;
-    border-radius: 10px;
-  }
+  display: flex;
+  flex-direction: row;
+}
+  
+.right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 5px;
+}
+
+.game-board {
+  border: solid 2px;
+  height: 80vh;
+  width: auto;
+  float: left;
+}
+  
+.play-button {
+  background-color: #4caf50;
+  font-size: 16px;
+  padding: 15px 30px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.controls {
+  font-size: 10px;
+}
+
+.next {
+  border: solid 2px;
+  height: auto;
+  width: auto;
+}
