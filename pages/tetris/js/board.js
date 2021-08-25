@@ -108,7 +108,7 @@ class Board {
 
             if (account.lines >= LINES_PER_LEVEL) {
                 account.level++;
-                account.lines -+LINES_PER_LEVEL;
+                account.lines -= LINES_PER_LEVEL;
                 time.level = LEVEL[account.level];
             }
         }
