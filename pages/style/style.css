@@ -60,6 +60,7 @@ footer {
 }
 #blog {
     margin-top: 10px;
+    display: none;
 }
 #posts {
     display: none;
