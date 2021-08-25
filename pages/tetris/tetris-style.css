@@ -38,3 +38,7 @@
   width: auto;
   background: gray;
 }
+.left-column {
+  display: flex;
+  flex-direction: column;
+}

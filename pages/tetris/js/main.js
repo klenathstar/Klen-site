@@ -7,11 +7,12 @@ function addEventListener() {
 function play() {
     resetGame();
     addEventListener();
+    showHighScores();
     
     if (requestId) {
         cancelAnimationFrame(requestId);
     }
-
+    
     animate();
 }
 
@@ -72,6 +73,9 @@ function gameOver() {
     ctx.fillStyle = 'red';
     ctx.font = '1px Courier New';
     ctx.fillText(' GAME OVER', 1.8, 4);
+
+    checkHighScore(account.score);
+    showHighScores();
 }
 
 let accountValues = {
@@ -101,4 +105,29 @@ function resetGame() {
     account.level = 0;
     board = new Board(ctx, ctxNext);
     time = {start: performance.now(), elapsed: 0, level: LEVEL[0]}
+}
+
+function checkHighScore(score) {
+    const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) || [];
+    const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
+
+    if (score > lowestScore) {
+        saveHighScore(score, highScores);
+    }
+}
+
+function saveHighScore(score, highScores) {
+    highScores.push(score);
+    highScores.sort((a, b) => b - a);
+    highScores.splice(NO_OF_HIGH_SCORES);
+    localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
+}
+
+function showHighScores() {
+    const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) || [];
+    const highScoreList = document.getElementById(HIGH_SCORES);
+
+    highScoreList.innerHTML = highScores
+        .map((score) => `<li>${score}`)
+        .join('');
 }

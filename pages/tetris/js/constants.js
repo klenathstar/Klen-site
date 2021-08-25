@@ -87,3 +87,11 @@ const LEVEL = {
     20: 30,
 }
 Object.freeze(LEVEL);
+
+const NO_OF_HIGH_SCORES = 10;
+const HIGH_SCORES = 'scores';
+
+const highScoreString = localStorage.getItem(HIGH_SCORES);
+const highScores = JSON.parse(highScoreString) || [];
+const lowestScore = highScores[NO_OF_HIGH_SCORES -1]?.score ?? 0;
+const highScoreList = document.getElementById(HIGH_SCORES);
