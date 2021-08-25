@@ -1,10 +1,31 @@
 html {
-    background: gray;
+    background: rgb(112,112,112);
+    background: linear-gradient(180deg, rgba(112,112,112,1) 0%, rgba(154,154,154,1) 25%, rgba(212,212,212,1) 100%);
+    background-size: 150% 150%;
     font-size: 14px;
+    font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
 }
+header {
+    background: rgb(111, 140, 179);
+    opacity: 70%;
+    margin-top: -10px;
+    margin-left: -10px;
+    width: auto;
+    height: 50px;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom-right-radius: 25px;
+}
 nav {
-    font-size: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 800px;
+    font-size: 45px;
+    margin-left: 5px;
+    margin-right: 20px;
+    font-weight: bolder;
 }
 #headshot {
     float: left;
@@ -21,9 +42,33 @@ a {
     text-decoration: none;
 }
 footer {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     border-top: green;
     margin: 10px, auto, 10px, auto;
-    text-align: center;
-    margin-top: 20%;
+    width: fit-content;
+    bottom: 5px;
+    position: fixed;
+    border-top: 1px solid black;
+}
+#content {
+    margin-top: 10px;
+}
+#bio {
+    margin-left: 430px;
+    line-height: 18px;
+}
+#blog {
+    margin-top: 10px;
+}
+#posts {
+    display: none;
+}
+#photo-reel {
+    display: flex;
+    flex-direction: row;
+    margin-top: 250px;
+}
+.photos {
+    padding: 5px;
 }
