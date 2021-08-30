@@ -1,7 +1,9 @@
 html {
+    height: 100%;
     background: rgb(112,112,112);
     background: linear-gradient(180deg, rgba(112,112,112,1) 0%, rgba(154,154,154,1) 25%, rgba(212,212,212,1) 100%);
-    background-size: 150% 150%;
+    background-size: cover;
+    background-attachment: fixed;
     font-size: 14px;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
@@ -28,13 +30,12 @@ nav {
     font-weight: bolder;
 }
 #headshot {
-    float: left;
     width: 400px;
     height: 300px;
 }
 aside {
     float: right;
-    margin-right: 1em;
+    margin-right: 1%;
     text-align: right;
 }
 a {
@@ -42,20 +43,21 @@ a {
     text-decoration: none;
 }
 footer {
+    position: fixed;
     font-size: 18px;
     font-weight: bold;
-    border-top: green;
-    margin: 10px, auto, 10px, auto;
     width: fit-content;
-    bottom: 5px;
-    position: fixed;
+    border-top: green;
+    text-align: center;
+    right: 0.2%;
+    bottom: 0;
     border-top: 1px solid black;
 }
 #content {
     margin-top: 10px;
+    margin-left: 10%;
 }
 #bio {
-    margin-left: 430px;
     line-height: 18px;
 }
 #blog {
@@ -69,6 +71,7 @@ footer {
     display: flex;
     flex-direction: row;
     margin-top: 250px;
+    padding-bottom: 18px;
 }
 .photos {
     padding: 5px;
