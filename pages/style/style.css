@@ -67,6 +67,8 @@ footer {
 }
 #bio {
     line-height: 18px;
+    max-width: 400px;
+    word-wrap: normal;
 }
 #blog {
     margin-top: 10px;
