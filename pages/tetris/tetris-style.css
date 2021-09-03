@@ -4,6 +4,20 @@
   margin-top: 10px;
 }
   
+#board-w-btns {
+  display: grid;
+  grid-template-columns: 1;
+  grid-template-rows: 2;
+}
+
+.controls {
+  grid-auto-rows: auto;
+  width: 5vh;
+  height: 5vh;
+  min-width: 24px;
+  min-height: 24px;
+}
+
 .right-column {
   display: flex;
   flex-direction: column;
